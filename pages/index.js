@@ -59,11 +59,11 @@ export default ({ musics = [] }) => {
   );
 };
 
-// export async function getStaticProps(_context) {
-//   const res = await fetch(`${process.env.API_URL}/get-musics`);
-//   const musics = await res.json();
+export async function getStaticProps(_context) {
+  const res = await fetch(`${process.env.API_URL}/get-musics`);
+  const musics = await res.json();
 
-//   return {
-//     props: { musics },
-//   };
-// }
+  return {
+    props: { musics },
+  };
+}
