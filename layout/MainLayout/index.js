@@ -6,7 +6,7 @@ import { CustomLayoutGrid } from "./styles";
 export const MainLayout = ({ children }) => {
 
   return (
-    <CustomLayoutGrid height={height}>
+    <CustomLayoutGrid>
       <CustomAppBar />
       <Grid item container xs={12} justifyContent="center" alignItems="center">
         {children}
