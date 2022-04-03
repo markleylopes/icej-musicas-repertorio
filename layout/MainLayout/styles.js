@@ -13,7 +13,7 @@ export const CustomLayoutGrid = styled.section`
     #83a4d4
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  height: ${({ height }) => height}px;
+  height: 100vh;
   width: 100%;
   display: grid;
   grid-template-rows: 56px auto;

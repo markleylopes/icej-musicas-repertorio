@@ -6,9 +6,9 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import { useRouter } from "next/router";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import { useRouter } from "next/router";
+import { UpsertModal } from "components/UpsertModal";
 import { useAuthentication } from "hooks/useAuthentication";
 
 export const CustomAppBar = () => {
@@ -31,10 +31,10 @@ export const CustomAppBar = () => {
           <Typography variant="h6" component="div">
             Músicas
           </Typography>
-          {user && (
-            <div>
+          {!user && (
+            <div style={{ display: "flex", gap: 10 }}>
+              <UpsertModal />
               <IconButton
-                size="large"
                 edge="start"
                 color="inherit"
                 size="small"
@@ -45,7 +45,7 @@ export const CustomAppBar = () => {
               </IconButton>
             </div>
           )}
-          {!user && (
+          {!!user && (
             <div>
               <Button variant="link" onClick={() => router.push("/login")}>
                 Login

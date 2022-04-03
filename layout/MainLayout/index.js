@@ -4,11 +4,6 @@ import { CustomAppBar } from "components/CustomAppBar";
 import { CustomLayoutGrid } from "./styles";
 
 export const MainLayout = ({ children }) => {
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    setHeight(window.innerHeight);
-  }, []);
 
   return (
     <CustomLayoutGrid height={height}>

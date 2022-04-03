@@ -46,8 +46,10 @@ export default ({ musics = [] }) => {
               <React.Fragment key={i.title}>
                 <MusicListItem
                   title={capitalizeFirstLetter(i.title.toLowerCase())}
+                  id={i.id}
                   link={i.link}
                   tone={i.tone}
+                  musicSheetLink={i.musicSheetLink}
                 />
                 <Divider variant="middle" />
               </React.Fragment>
@@ -60,7 +62,7 @@ export default ({ musics = [] }) => {
 };
 
 export async function getStaticProps(_context) {
-  const res = await fetch(`${process.env.API_URL}/get-musics`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/get-musics`);
   const musics = await res.json();
 
   return {

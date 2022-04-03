@@ -10,7 +10,7 @@ const hello = async (_req: NextApiRequest, res: NextApiResponse) => {
     const result = await store
       .collection("musics")
       .get()
-      .then((res) => res.docs.map((doc) => doc.data()));
+      .then((res) => res.docs.map((doc) => ({ id: doc.id, ...doc.data()})));
 
     res.status(200).json(result);
   } catch (error) {
