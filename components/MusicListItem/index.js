@@ -1,5 +1,6 @@
 import { Link, Card, Grid, Typography, CardContent } from "@mui/material";
 import { UpsertModal } from "components/UpsertModal";
+import { useAuthentication } from "../../hooks/useAuthentication";
 
 export const Title = ({ value }) => (
   <span
@@ -12,13 +13,15 @@ export const Title = ({ value }) => (
 );
 
 export const MusicListItem = ({
-  id="",
+  id = "",
   title = "",
   tone = "",
   link = "",
   musicSheetLink = "",
 }) => {
   const links = [link];
+  const { isLogged } = useAuthentication();
+
   return (
     <Card elevation={0}>
       <CardContent
@@ -31,7 +34,13 @@ export const MusicListItem = ({
           <Typography fontWeight="bold" variant="body1" component="div">
             {title}
           </Typography>
-          <UpsertModal mode="edit" initialId={id} initialMusicValue={{ title, tone, link, musicSheetLink }} />
+          {isLogged && (
+            <UpsertModal
+              mode="edit"
+              initialId={id}
+              initialMusicValue={{ title, tone, link, musicSheetLink }}
+            />
+          )}
         </Grid>
         <Grid item xs={4}>
           <Typography textAlign="right" variant="body1" bold component="div">

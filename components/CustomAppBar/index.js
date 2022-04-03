@@ -12,10 +12,9 @@ import { UpsertModal } from "components/UpsertModal";
 import { useAuthentication } from "hooks/useAuthentication";
 
 export const CustomAppBar = () => {
-  const { user, logout } = useAuthentication();
+  const { isLogged, logout } = useAuthentication();
   const router = useRouter();
 
-  console.log("user: ", user);
   return (
     <Box>
       <AppBar sx={{ height: "56px" }} elevation={0} position="static">
@@ -31,7 +30,7 @@ export const CustomAppBar = () => {
           <Typography variant="h6" component="div">
             Músicas
           </Typography>
-          {!user && (
+          {isLogged && (
             <div style={{ display: "flex", gap: 10 }}>
               <UpsertModal />
               <IconButton
@@ -45,10 +44,13 @@ export const CustomAppBar = () => {
               </IconButton>
             </div>
           )}
-          {!!user && (
+          {!isLogged && (
             <div>
-              <Button variant="link" onClick={() => router.push("/login")}>
-                Login
+              <Button
+                variant="link"
+                onClick={() => router.push(router.pathname !== "/login" ? "/login" : "/")}
+              >
+                {router.pathname !== "/login" ? "Login" : "Voltar"}
               </Button>
             </div>
           )}
