@@ -61,7 +61,7 @@ export default ({ musics = [] }) => {
   );
 };
 
-export async function getStaticProps(_context) {
+export async function getServerSideProps(_context) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/get-musics`);
   const musics = await res.json();
 
