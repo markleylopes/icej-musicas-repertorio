@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MainLayout } from "layout/MainLayout";
 import { MusicListItem } from "components/MusicListItem";
 import { Grid, TextField, Divider } from "@mui/material";
+import { firebaseAdmin } from "services/firebaseAdmin";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -61,9 +62,13 @@ export default ({ musics = [] }) => {
   );
 };
 
-export async function getServerSideProps(_context) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/get-musics`);
-  const musics = await res.json();
+export async function getStaticProps(_context) {
+  const store = firebaseAdmin.firestore();
+
+  const musics = await store
+    .collection("musics")
+    .get()
+    .then((res) => res.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
 
   return {
     props: { musics },
