@@ -22,10 +22,12 @@ export const useUpsert = ({ initialId, initialMusicValue = mValueProp }) => {
     e.preventDefault();
     try {
       setLoading(true);
-      // const url = `${process.env.NEXT_PUBLIC_API_URL}/revalidate`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/revalidate`;
 
       await setDoc(doc(db, "musics", initialId || uuid()), music);
-      // await fetch(url);
+      await fetch(url)
+        .then()
+        .catch((error) => console.log(error));
 
       router.push("/");
       setOpen(false);
