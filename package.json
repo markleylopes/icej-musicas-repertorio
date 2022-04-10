@@ -12,6 +12,7 @@
     "@mui/material": "^5.5.2",
     "firebase": "^9.6.10",
     "firebase-admin": "^10.0.2",
+    "lodash": "^4.17.21",
     "material-table": "^2.0.3",
     "next": "latest",
     "next-pwa": "^5.4.1",

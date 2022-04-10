@@ -3,18 +3,10 @@ import { MainLayout } from "layout/MainLayout";
 import { MusicListItem } from "components/MusicListItem";
 import { Grid, TextField, Divider } from "@mui/material";
 import { firebaseAdmin } from "services/firebaseAdmin";
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+import { useMusicsState } from "../hooks/useMusicsState";
 
 export default ({ musics = [] }) => {
-  const [filter, setFilter] = useState("");
-
-  const getFiltered = (arrayValues) =>
-    arrayValues.filter((i) =>
-      i.title.toLowerCase().includes(filter.toLowerCase())
-    );
+  const { filteredMusics, filter, onSetFilter } = useMusicsState(musics);
 
   return (
     <MainLayout>
@@ -24,7 +16,7 @@ export default ({ musics = [] }) => {
             fullWidth
             placeholder="Buscar Música"
             value={filter}
-            onChange={({ target }) => setFilter(target.value)}
+            onChange={({ target }) => onSetFilter(target.value)}
             InputProps={{
               style: {
                 background: "white",
@@ -43,10 +35,10 @@ export default ({ musics = [] }) => {
               width: "100%",
             }}
           >
-            {getFiltered(musics).map((i) => (
+            {filteredMusics.map((i) => (
               <React.Fragment key={i.title}>
                 <MusicListItem
-                  title={capitalizeFirstLetter(i.title.toLowerCase())}
+                  title={i.title}
                   id={i.id}
                   link={i.link}
                   tone={i.tone}
@@ -62,7 +54,7 @@ export default ({ musics = [] }) => {
   );
 };
 
-export async function getStaticProps(_context) {
+export async function getServerSideProps(_context) {
   const store = firebaseAdmin.firestore();
 
   const musics = await store
