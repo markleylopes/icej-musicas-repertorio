@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/display-name */
+import { Fragment } from "react";
 import { MainLayout } from "layout/MainLayout";
 import { MusicListItem } from "components/MusicListItem";
 import { Grid, TextField, Divider } from "@mui/material";
-import { firebaseAdmin } from "services/firebaseAdmin";
 import { useMusicsState } from "../hooks/useMusicsState";
 
-export default ({ musics = [] }) => {
-  const { filteredMusics, filter, onSetFilter } = useMusicsState(musics);
+export default () => {
+  const { filteredMusics, filter, onSetFilter } = useMusicsState();
 
   return (
     <MainLayout>
@@ -26,7 +27,7 @@ export default ({ musics = [] }) => {
           />
         </Grid>
 
-        <Grid item xs={12} comtainer>
+        <Grid item xs={12} container>
           <div
             style={{
               height: "80vh",
@@ -36,7 +37,7 @@ export default ({ musics = [] }) => {
             }}
           >
             {filteredMusics.map((i) => (
-              <React.Fragment key={i.title}>
+              <Fragment key={i.title}>
                 <MusicListItem
                   title={i.title}
                   id={i.id}
@@ -45,7 +46,7 @@ export default ({ musics = [] }) => {
                   musicSheetLink={i.musicSheetLink}
                 />
                 <Divider variant="middle" />
-              </React.Fragment>
+              </Fragment>
             ))}
           </div>
         </Grid>
@@ -53,16 +54,3 @@ export default ({ musics = [] }) => {
     </MainLayout>
   );
 };
-
-export async function getServerSideProps(_context) {
-  const store = firebaseAdmin.firestore();
-
-  const musics = await store
-    .collection("musics")
-    .get()
-    .then((res) => res.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-
-  return {
-    props: { musics },
-  };
-}

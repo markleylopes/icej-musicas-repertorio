@@ -43,7 +43,7 @@ export const MusicListItem = ({
           )}
         </Grid>
         <Grid item xs={4}>
-          <Typography textAlign="right" variant="body1" bold component="div">
+          <Typography textAlign="right" variant="body1" component="div">
             <Title value="Tom" />
             {tone}
           </Typography>

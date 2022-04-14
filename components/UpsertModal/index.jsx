@@ -11,14 +11,22 @@ import {
 } from "@mui/material";
 import { tones } from "constants";
 import { useUpsert } from "./useUpsert";
-import { Add, Edit } from "@mui/icons-material";
+import { Add, Edit, Delete } from "@mui/icons-material";
 
+// eslint-disable-next-line react/prop-types
 export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
-  const { open, loading, setOpen, music, onSubmit, onChangeValue } = useUpsert({
+  const {
+    open,
+    loading,
+    musicFormValues,
+    setOpen,
+    onSubmit,
+    onDelete,
+    onChangeValue,
+  } = useUpsert({
     initialId,
     initialMusicValue,
   });
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -32,6 +40,15 @@ export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
       <IconButton onClick={handleClickOpen} size="small" color="inherit">
         {mode === "add" ? <Add /> : <Edit fontSize="small" />}
       </IconButton>
+      {mode !== "add" && (
+        <IconButton
+          onClick={() => onDelete(initialId)}
+          size="small"
+          color="inherit"
+        >
+          <Delete fontSize="small" />
+        </IconButton>
+      )}
       {open && (
         <Dialog
           open={open}
@@ -56,7 +73,7 @@ export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
                   }}
                   fullWidth
                   label="Nome"
-                  value={music.title}
+                  value={musicFormValues.title}
                   onChange={onChangeValue}
                   name="title"
                 />
@@ -70,7 +87,7 @@ export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
                   }}
                   fullWidth
                   label="Tom"
-                  value={music.tone}
+                  value={musicFormValues.tone}
                   onChange={onChangeValue}
                   name="tone"
                 >
@@ -91,7 +108,7 @@ export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
                     type: "url",
                     title: "Digite um link válido",
                   }}
-                  value={music.link}
+                  value={musicFormValues.link}
                   onChange={onChangeValue}
                   name="link"
                 />
@@ -104,7 +121,7 @@ export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
                   }}
                   fullWidth
                   label="Link da cifra"
-                  value={music.musicSheetLink}
+                  value={musicFormValues.musicSheetLink}
                   onChange={onChangeValue}
                   name="musicSheetLink"
                 />
