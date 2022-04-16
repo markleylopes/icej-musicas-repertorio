@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
 import { Grid } from "@mui/material";
 import { CustomAppBar } from "components/CustomAppBar";
 import { CustomLayoutGrid } from "./styles";

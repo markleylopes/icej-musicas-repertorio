@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link, Card, Grid, Typography, CardContent } from "@mui/material";
 import { UpsertModal } from "components/UpsertModal";
 import { useAuthentication } from "../../hooks/useAuthentication";

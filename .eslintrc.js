@@ -18,6 +18,7 @@ module.exports = {
     "plugins": [
         "react"
     ],
+    "ignorePatterns": ["*.ts", "*.tsx"],
     "rules": {
         "react/react-in-jsx-scope": "off"
     }

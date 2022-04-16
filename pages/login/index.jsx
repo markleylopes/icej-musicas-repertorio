@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { useEffect, useState } from "react";
 import { auth } from "services/firebase";
 import { useRouter } from "next/router";
@@ -21,7 +22,8 @@ export default () => {
       .then(() => {
         router.push("/");
       })
-      .catch((err) => setError(true))
+      // eslint-disable-next-line no-unused-vars
+      .catch((_err) => setError(true))
       .finally(() => {
         setLoading(false);
       });
