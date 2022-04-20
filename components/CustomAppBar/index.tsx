@@ -47,7 +47,7 @@ export const CustomAppBar = () => {
           {!isLogged && (
             <div>
               <Button
-                variant="link"
+                variant="text"
                 onClick={() => router.push(router.pathname !== "/login" ? "/login" : "/")}
               >
                 {router.pathname !== "/login" ? "Login" : "Voltar"}

@@ -14,7 +14,7 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({ email: "", password: "" });
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
 
@@ -22,19 +22,17 @@ export default () => {
       .then(() => {
         router.push("/");
       })
-      // eslint-disable-next-line no-unused-vars
       .catch((_err) => setError(true))
       .finally(() => {
         setLoading(false);
       });
   };
 
-  const setValue = ({ target }) =>
+  const setValue = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
     setUserData((currentValue) => ({
       ...currentValue,
       [target.name]: target.value,
     }));
-  // #4f88cc
 
   useEffect(() => {
     if (user) {

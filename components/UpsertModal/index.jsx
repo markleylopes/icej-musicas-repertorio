@@ -13,7 +13,6 @@ import { tones } from "constants";
 import { useUpsert } from "./useUpsert";
 import { Add, Edit, Delete } from "@mui/icons-material";
 
-// eslint-disable-next-line react/prop-types
 export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
   const {
     open,
