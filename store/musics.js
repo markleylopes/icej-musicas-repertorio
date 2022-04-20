@@ -6,10 +6,7 @@ export const useMusicStore = create((set) => ({
   setFilter: (filter) => set({ filter }),
   filteredMusics: [],
   setFilteredMusics: (filteredMusics) => set({ filteredMusics }),
-  setMusics: (musics) => {
-    console.log("musics asdasdsa: ", musics);
-    return set({ musics });
-  },
+  setMusics: (musics) => set({ musics }),
   addMusic: (newMusic) =>
     set(({ musics }) => ({ musics: [...musics, newMusic] })),
   removeMusic: (id) =>

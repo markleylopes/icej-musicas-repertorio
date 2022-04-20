@@ -36,10 +36,11 @@ export default () => {
               width: "100%",
             }}
           >
-            {filteredMusics.map((i) => (
+            {filteredMusics.map((i, index) => (
               <Fragment key={i.title}>
                 <MusicListItem
                   title={i.title}
+                  listNumber={`${index + 1}`.padStart(2, '0')}
                   id={i.id}
                   link={i.link}
                   tone={i.tone}

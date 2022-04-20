@@ -18,6 +18,7 @@ export const MusicListItem = ({
   title = "",
   tone = "",
   link = "",
+  listNumber = "",
   musicSheetLink = "",
 }) => {
   const links = [link];
@@ -31,9 +32,9 @@ export const MusicListItem = ({
         spacing={2}
         container
       >
-        <Grid item xs={8} display="flex" gap="12px">
+        <Grid item xs={8} display="flex" gap="12px" flexWrap="wrap">
           <Typography fontWeight="bold" variant="body1" component="div">
-            {title}
+            {listNumber} - {title}
           </Typography>
           {isLogged && (
             <UpsertModal

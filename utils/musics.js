@@ -7,4 +7,4 @@ export const getFilteredMusics = (arrayValues, filter) =>
     .filter((i) => i.title.toLowerCase().includes(filter.toLowerCase()))
     .map((i) => {
       return { ...i, title: capitalizeFirstLetter(i.title) };
-    });
+    }).sort((a, b) => a.title.localeCompare(b.title));
