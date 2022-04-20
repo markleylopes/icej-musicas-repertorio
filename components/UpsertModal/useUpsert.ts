@@ -1,29 +1,35 @@
+import React, { useState } from "react";
 import uuid from "react-uuid";
-import shallow from "zustand/shallow";
 import { db } from "services/firebase";
-import { useState } from "react";
-import { useMusicStore } from "../../store/musics";
+import { musicType } from "typings/music";
+import { useMusicStore } from "store/useMusicStore";
 import { doc, setDoc, deleteDoc } from "firebase/firestore";
 
 const mValueProp = { title: "", link: "", tone: "" };
 
-export const useUpsert = ({ initialId, initialMusicValue = mValueProp }) => {
-  const [addMusic, updateMusic, removeMusic] = useMusicStore(
-    (s) => [s.addMusic, s.updateMusic, s.removeMusic],
-    shallow
-  );
+type useUpsertProps = {
+  initialId?: string;
+  initialMusicValue?: musicType;
+};
+
+export const useUpsert = ({
+  initialId,
+  initialMusicValue = mValueProp,
+}: useUpsertProps = {}) => {
+  const { addMusic, updateMusic, removeMusic } = useMusicStore();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [musicFormValues, setMusicFormValues] = useState(initialMusicValue);
+  const [musicFormValues, setMusicFormValues] =
+    useState<musicType>(initialMusicValue);
 
-  const onChangeValue = ({ target }) =>
-  setMusicFormValues((currentValues) => ({
+  const onChangeValue = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
+    setMusicFormValues((currentValues) => ({
       ...currentValues,
       [target.name]: target.value,
     }));
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
@@ -45,11 +51,10 @@ export const useUpsert = ({ initialId, initialMusicValue = mValueProp }) => {
     }
   };
 
-  const onDelete = async (id) => {
-    removeMusic(id)
+  const onDelete = async (id: string) => {
+    removeMusic(id);
     deleteDoc(doc(db, "musics", id));
-
-  }
+  };
 
   return {
     open,

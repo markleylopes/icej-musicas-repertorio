@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
 import { Grid } from "@mui/material";
 import { CustomAppBar } from "components/CustomAppBar";
 import { CustomLayoutGrid } from "./styles";
 
-export const MainLayout = ({ children }) => {
+type MainLayoutProps = { children: React.ReactElement };
 
+export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <CustomLayoutGrid>
       <CustomAppBar />

@@ -1,7 +1,7 @@
 import { db } from "../services/firebase";
 import { debounce } from "lodash";
 import { collection } from "firebase/firestore";
-import { useMusicStore } from "../store/musics";
+import { useMusicStore } from "store/useMusicStore";
 import { getFilteredMusics } from "../utils/musics";
 import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import { useCallback, useEffect } from "react";
@@ -19,7 +19,7 @@ export const useMusicsState = () => {
     setMusics,
     setFilter,
     setFilteredMusics,
-  } = useMusicStore((s) => s, shallow);
+  } = useMusicStore();
 
   const updateFilteredMusics = debounce((m, v) => {
     setFilteredMusics(getFilteredMusics(m, v));

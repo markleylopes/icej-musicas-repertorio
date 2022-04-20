@@ -9,11 +9,22 @@ import {
   DialogContent,
   LinearProgress,
 } from "@mui/material";
-import { tones } from "constants";
+import { tones } from "constants/index";
 import { useUpsert } from "./useUpsert";
+import { musicType } from "typings/music";
 import { Add, Edit, Delete } from "@mui/icons-material";
 
-export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
+type upsertModalProps = {
+  mode?: "add" | "remove";
+  initialId?: string;
+  initialMusicValue?: musicType;
+};
+
+export const UpsertModal = ({
+  initialId,
+  mode = "add",
+  initialMusicValue,
+}: upsertModalProps = {}) => {
   const {
     open,
     loading,
@@ -39,7 +50,7 @@ export const UpsertModal = ({ mode = "add", initialId, initialMusicValue }) => {
       <IconButton onClick={handleClickOpen} size="small" color="inherit">
         {mode === "add" ? <Add /> : <Edit fontSize="small" />}
       </IconButton>
-      {mode !== "add" && (
+      {initialId && mode !== "add" && (
         <IconButton
           onClick={() => onDelete(initialId)}
           size="small"

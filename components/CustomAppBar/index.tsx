@@ -9,6 +9,7 @@ import {
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useRouter } from "next/router";
 import { UpsertModal } from "components/UpsertModal";
+import { CustomToolbar } from "./styles";
 import { useAuthentication } from "hooks/useAuthentication";
 
 export const CustomAppBar = () => {
@@ -18,14 +19,9 @@ export const CustomAppBar = () => {
   return (
     <Box>
       <AppBar sx={{ height: "56px" }} elevation={0} position="static">
-        <Toolbar
+        <CustomToolbar
           disableGutters={true}
-          sx={{
-            height: "56px",
-            padding: "0 16px !important",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
+          
         >
           <Typography variant="h6" component="div">
             Músicas
@@ -54,7 +50,7 @@ export const CustomAppBar = () => {
               </Button>
             </div>
           )}
-        </Toolbar>
+        </CustomToolbar>
       </AppBar>
     </Box>
   );
